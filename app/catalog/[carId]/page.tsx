@@ -1,6 +1,6 @@
 // import { Metadata } from "next";
 import { QueryClient, HydrationBoundary, dehydrate } from "@tanstack/react-query";
-import { fetchCarById } from "@/lib/api/notes"; // Функція має називатися fetchNoteById за ТЗ
+import { fetchCarById } from "@/lib/api/cars.service"; // Функція має називатися fetchNoteById за ТЗ
 import CarDetailsClient from "@/app/catalog/[carId]/CarDetails.client";
 
 // type Props = {

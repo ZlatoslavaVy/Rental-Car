@@ -2,7 +2,7 @@
 
 import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-import { fetchCarById } from "@/lib/api/notes";
+import { fetchCarById } from "@/lib/api/cars.service";
 import css from "@/components/NoteDetails/NoteDetails.module.css";
 
 export default function CarDetailsClient() {
