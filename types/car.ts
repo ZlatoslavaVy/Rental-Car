@@ -1,16 +1,25 @@
-// export type NoteTag = "Todo" | "Work" | "Personal" | "Meeting" | "Shopping";
+export interface Car {
+  id: string;
+  year: number;
+  brand: string;
+  model: string;
+  type: string;
+  img: string;
+  description: string;
+  fuelConsumption: string;
+  engine: string;
+  features: string[];
+  rentalPrice: string;
+  location: {
+    country: string;
+    city: string;
+  };
+  rentalConditions: string[];
+  mileage: number;
+}
 
-// export interface Note {
-//   id: string;
-//   title: string;
-//   content: string;
-//   tag: NoteTag;
-//   createdAt: string;
-//   updatedAt: string;
-// }
-
-// export interface NewNote {
-//   title: string;
-//   content: string;
-//   tag: NoteTag;
-// }
+export interface CarsResponse {
+  cars: Car[];
+  page: number;
+  totalPages: number;
+}
