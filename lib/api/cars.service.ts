@@ -1,8 +1,8 @@
-import type { Note, NewNote } from "@/types/car";
+import type { Car, CarsResponse } from "@/types/car";
 import { api } from "@/lib/api/instance";
 
 export interface FetchCarsResponse {
-  cars: Note[];
+  cars: Car[];
   totalPages: number;
 }
 
@@ -28,17 +28,17 @@ export const fetchCars = async (params?: FetchCarsParams) => {
     queryParams.perPage = params.perPage;
   }
 
-  if (params?.search) {
-    queryParams.search = params.search;
-  }
+  //   if (params?.search) {
+  //     queryParams.search = params.search;
+  //   }
 
-  const response = await api.get<FetchCarsResponse>("", {
+  const response = await api.get<CarsResponse>("/cars", {
     params: queryParams,
   });
   return response.data;
 };
 
-export const fetchCarById = async (id: string): Promise<Note> => {
-  const response = await api.get<Note>(`/${id}`);
+export const fetchCarById = async (id: string): Promise<Car> => {
+  const response = await api.get<Car>(`/cars/${id}`);
   return response.data;
 };
