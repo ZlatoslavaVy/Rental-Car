@@ -37,6 +37,8 @@
   font-size: 1rem;
 }
 
-.navigationLink:hover {
+.navigationLink:hover,
+.navigationLink:active,
+.navigationLink:focus {
   color: #00aad4;
 }
