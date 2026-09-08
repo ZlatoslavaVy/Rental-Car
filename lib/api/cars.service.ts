@@ -42,13 +42,3 @@ export const fetchCarById = async (id: string): Promise<Note> => {
   const response = await api.get<Note>(`/${id}`);
   return response.data;
 };
-
-export const createNote = async (note: NewNote): Promise<Note> => {
-  const response = await api.post<Note>("", note);
-  return response.data;
-};
-
-export const deleteNote = async (id: string): Promise<Note> => {
-  const response = await api.delete<Note>(`/${id}`);
-  return response.data;
-};
