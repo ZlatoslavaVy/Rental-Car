@@ -6,3 +6,11 @@ body {
   margin: 0;
   background-color: #f8f9fa;
 }
+
+:root {
+  --color-white: #ffffff;
+  --color-black: #121417;
+  --color-accent: #3470ff;
+  --color-hover: #0b44cd;
+  --color-background: #f3f3f2;
+}

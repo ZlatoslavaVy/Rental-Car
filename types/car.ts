@@ -37,3 +37,9 @@ export interface CarsResponse {
   page: number;
   totalPages: number;
 }
+
+export interface RentCarPayload {
+  name: string;
+  email: string;
+  comment: string;
+}

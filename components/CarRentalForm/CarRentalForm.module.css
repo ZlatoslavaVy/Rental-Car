@@ -1,0 +1,57 @@
+.formWrapper {
+  margin-top: 32px;
+  padding: 32px;
+  background-color: var(--color-white);
+  border-radius: 16px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.formTitle {
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--color-black);
+}
+
+.formDescription {
+  margin-bottom: 24px;
+  font-weight: 500;
+  color: var(--color-silver);
+}
+
+.rentButton {
+  display: flex;
+  margin-top: 8px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.loader {
+  --color-1: #fff;
+  --size: 1px;
+
+  width: calc(24 * var(--size));
+  height: calc(24 * var(--size));
+  border-radius: 50%;
+  display: inline-block;
+  border-top: calc(3 * var(--size)) solid var(--color-1);
+  border-right: calc(3 * var(--size)) solid transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

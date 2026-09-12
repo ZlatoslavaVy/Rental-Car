@@ -1,0 +1,87 @@
+.container {
+  display: flex;
+  width: 100%;
+  max-width: 1232px;
+  margin: 0 auto;
+  padding: 84px 0 176px 0;
+  gap: 32px;
+}
+
+.image {
+  border-radius: 16px;
+}
+
+.detailsCarWrapper {
+  width: 528px;
+  padding: 32px 24px;
+  border-radius: 16px;
+  background-color: var(--color-white);
+}
+
+.carHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.carModel {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.33;
+}
+
+.article {
+  font-weight: 500;
+  color: var(--color-silver);
+}
+
+.carLocation {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 4px;
+  font-weight: 500;
+}
+
+.carPrice {
+  margin-bottom: 32px;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.33;
+  color: var(--color-accent);
+}
+
+.carDescription {
+  margin-bottom: 68px;
+  font-weight: 500;
+}
+
+.sectionTitle {
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  /*margin-bottom: 16px;*/
+  gap: 8px;
+  font-weight: 500;
+  list-style: none;
+}
+
+.divider {
+  display: block;
+  width: 480px;
+  margin: 24px 0;
+  border: 1px solid #dadde1;
+}
