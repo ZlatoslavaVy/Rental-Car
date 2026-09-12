@@ -18,6 +18,20 @@ export interface Car {
   mileage: number;
 }
 
+export interface Location {
+  country: string;
+  city: string;
+  address: string;
+}
+
+export interface CarsParams {
+  brand?: string;
+  price?: number;
+  minMileage?: number;
+  maxMileage?: number;
+  page?: number;
+}
+
 export interface CarsResponse {
   cars: Car[];
   page: number;

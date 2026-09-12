@@ -1,6 +1,6 @@
 // import { Metadata } from "next";
 import { QueryClient, HydrationBoundary, dehydrate } from "@tanstack/react-query";
-import { fetchNotes } from "@/lib/api/cars.service";
+import { fetchCars } from "@/lib/api/cars.service";
 import CatalogClient from "./Catalog.client";
 
 // export const metadata: Metadata = {

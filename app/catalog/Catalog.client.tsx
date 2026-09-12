@@ -1,72 +1,74 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { useDebouncedCallback } from "use-debounce";
-import { fetchNotes } from "@/lib/api/cars.service";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { fetchCars } from "@/lib/api/cars.service";
+import { CarsParams } from "@/types/car";
 
-// import SearchBox from "@/components/SearchBox/SearchBox";
-// import Pagination from "@/components/Pagination/Pagination";
-// import NoteList from "@/components/NoteList/NoteList";
+const CatalogClient = () => {
+  const [filters] = useState<CarsParams>({});
 
-// import css from "@/components/NotesPage/NotesPage.module.css";
-
-interface CatalogClientProps {
-  initialTag?: string;
-}
-
-export default function CatalogClient({ initialTag }: CatalogClientProps) {
-  const [queryInput, setQueryInput] = useState("");
-  const [search, setSearch] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-
-  // Відкладений пошук
-  const debouncedSearch = useDebouncedCallback((value: string) => {
-    setSearch(value);
-    setCurrentPage(1);
-  }, 300);
-
-  const handleSearchChange = (value: string) => {
-    setQueryInput(value);
-    debouncedSearch(value);
-  };
-
-  // Запит на отримання нотаток
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["notes", search, currentPage, initialTag],
-    queryFn: () => fetchNotes({ page: currentPage, perPage: 12, search, tag: initialTag }),
-    placeholderData: keepPreviousData,
-    refetchOnMount: false,
+  const { data, fetchNextPage, hasNextPage, isFetching, isLoading } = useInfiniteQuery({
+    queryKey: ["catalog", filters],
+    queryFn: ({ pageParam = 1 }) => fetchCars({ ...filters, page: pageParam }),
+    initialPageParam: 1,
+    getNextPageParam: lastResponse => {
+      const nextPage = lastResponse.page + 1;
+      return nextPage <= lastResponse.totalPages ? nextPage : undefined;
+    },
   });
 
-  const notes = data?.notes ?? [];
-  const totalPages = data?.totalPages ?? 0;
+  const cars = data?.pages.flatMap(page => page.cars) || [];
 
   return (
-    <div className={css.app}>
-      <header className={css.toolbar}>
-        <SearchBox value={queryInput} onChange={handleSearchChange} />
+    <section style={{ padding: "40px", fontFamily: "sans-serif" }}>
+      <h1>Тестовий Каталог (Перевірка API)</h1>
 
-        {totalPages > 1 && (
-          <Pagination
-            totalPages={totalPages}
-            currentPage={currentPage}
-            onPageChange={setCurrentPage}
-          />
-        )}
+      {/* 1. ТИМЧАСОВИЙ ЛОАДЕР */}
+      {isLoading && <p>⏳ Завантажую машини з бекенду...</p>}
 
-        <Link href="/notes/action/create" className={css.button}>
-          Create note +
-        </Link>
-      </header>
+      {/* 2. ТИМЧАСОВИЙ СПИСОК МАШИН */}
+      {!isLoading && cars.length > 0 && (
+        <ul style={{ display: "flex", flexDirection: "column", gap: "10px", padding: 0 }}>
+          {cars.map(car => (
+            <li
+              key={car.id}
+              style={{
+                border: "1px solid #ccc",
+                padding: "16px",
+                borderRadius: "8px",
+                listStyle: "none",
+              }}
+            >
+              <strong>
+                {car.brand} {car.model}
+              </strong>{" "}
+              ({car.year}) — Ціна: {car.rentalPrice}
+            </li>
+          ))}
+        </ul>
+      )}
 
-      {/* Індикатори завантаження та помилки */}
-      {isLoading && <p>Loading notes...</p>}
-      {isError && <p>Something went wrong. Please try again later.</p>}
-
-      {/* Список нотаток */}
-      {notes.length > 0 && <NoteList notes={notes} />}
-    </div>
+      {/* 3. ТИМЧАСОВА КНОПКА ЗАВАНТАЖЕННЯ */}
+      {hasNextPage && (
+        <button
+          onClick={() => fetchNextPage()}
+          disabled={isFetching}
+          style={{
+            marginTop: "20px",
+            padding: "12px 24px",
+            backgroundColor: "#3470ff",
+            color: "white",
+            border: "none",
+            borderRadius: "8px",
+            cursor: "pointer",
+          }}
+        >
+          {isFetching ? "⏳ Вантажу ще..." : "Показати ще (Load More)"}
+        </button>
+      )}
+    </section>
   );
-}
+};
+
+export default CatalogClient;
