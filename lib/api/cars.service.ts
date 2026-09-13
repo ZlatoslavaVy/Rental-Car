@@ -1,4 +1,4 @@
-import type { Car, CarsResponse } from "@/types/car";
+import type { Car, CarsResponse, RentCarPayload } from "@/types/car";
 import { api } from "@/lib/api/instance";
 
 interface FetchCarsParams {
@@ -44,5 +44,10 @@ export const fetchCars = async (params?: FetchCarsParams) => {
 
 export const fetchCarById = async (id: string): Promise<Car> => {
   const response = await api.get<Car>(`/cars/${id}`);
+  return response.data;
+};
+
+export const makeBookingRequest = async (id: string, body: RentCarPayload) => {
+  const response = await api.post(`/cars/${id}/booking-requests`, body);
   return response.data;
 };
